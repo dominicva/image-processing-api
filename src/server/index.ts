@@ -1,3 +1,5 @@
-const sayHi = function (name: string): void {
-  console.log(`Hi! My name is ${name}`);
+const square = function (num: number): number {
+  return num ** 2;
 };
+
+export default square;
