@@ -1,4 +1,4 @@
-import { square, delayHi } from '../server/index';
+import { square, delayHi } from '../tests/helpers/dummies';
 
 it('expect square(5) to equal 25', () => {
   expect(square(5)).toEqual(25);
