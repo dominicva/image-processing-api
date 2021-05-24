@@ -29,23 +29,25 @@ const resizeAndWrite = function (
   inputImg: string,
   width: number,
   height: number
-): void {
+): string {
+  let resizedFileName = `${inputImg}-${width}x${height}.jpg`;
   sharp(path.join(ORIGINAL_IMAGES_DIR, inputImg))
     .resize(width, height)
-    .toFile(
-      path.join(RESIZED_IMAGES_DIR, `${inputImg}-w${width}h${height}.jpg`),
-      function (err) {
-        console.error(err);
-        // output.jpg is a 300 pixels wide and 200 pixels high image
-        // containing a scaled and cropped version of input.jpg
-      }
-    );
+    .toFile(path.join(RESIZED_IMAGES_DIR, resizedFileName), function (err) {
+      console.error(err);
+    });
+
+  return resizedFileName;
 };
 
 app.get('/api/images', (req: express.Request, res: express.Response): void => {
   const { filename, width, height } = url.parse(req.url, true).query;
-  resizeAndWrite(String(filename), Number(width), Number(height));
-  res.send('hello world');
+  const newImgFile = resizeAndWrite(
+    String(filename),
+    Number(width),
+    Number(height)
+  );
+  res.sendFile(path.join(RESIZED_IMAGES_DIR, newImgFile));
 });
 
 app.listen(PORT, () =>
