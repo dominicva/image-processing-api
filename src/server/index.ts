@@ -21,7 +21,6 @@ app.get('/api/images', async (req: express.Request, res: express.Response) => {
     height,
     format,
     metadata,
-    effect,
     blurFactor,
     toGrayscale,
   } = req.query;
@@ -45,7 +44,6 @@ app.get('/api/images', async (req: express.Request, res: express.Response) => {
   } else if (blurFactor) {
     outputFile = await processImg.blur(inputFile, Number(blurFactor));
   } else if (toGrayscale) {
-    // apply correct effect – currently grayscale or blur
     outputFile = await processImg.grayscale(inputFile);
   }
 
