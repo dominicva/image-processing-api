@@ -101,8 +101,7 @@ const blur = async function (
     `${name}-blur-${blurFactor}.png`
   );
 
-  // Blur the image. When used without parameters, performs a fast, mild blur of the output image. When a sigma is provided, performs a slower, more accurate Gaussian blur.
-  // Value between 0.3 and 1000
+  // Blur value between 0.3 and 1000
   await sharp(filepath).blur(blurFactor).png().toFile(output);
 
   return output;
