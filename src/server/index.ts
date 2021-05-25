@@ -1,22 +1,29 @@
 import path from 'path';
 import express from 'express';
-import url from 'url';
 
-import { resizeAndWrite, RESIZED_IMAGES_DIR } from './utils/resizeAndWrite';
+import {
+  parseQueryToFilename,
+  resizeAndWrite,
+  RESIZED_IMAGES_DIR,
+} from './utils/resizeAndWrite';
 
 const app = express();
 const PORT = 3000;
 
-app.get('/api/images', (req: express.Request, res: express.Response): void => {
-  const { filename, width, height } = url.parse(req.url, true).query;
+app.get('/api/images', (req: express.Request, res: express.Response, next) => {
+  const { filename, width, height } = req.query;
 
-  const resizedImg = resizeAndWrite(
-    String(filename),
-    Number(width),
-    Number(height)
+  // uses sharp to resize the image and write it to new file in 'resized' dir
+  resizeAndWrite(String(filename), Number(width), Number(height));
+
+  // filepath to the resized image
+  const resizedImg = path.join(
+    RESIZED_IMAGES_DIR,
+    parseQueryToFilename(String(filename), Number(width), Number(height))
   );
 
-  res.sendFile(path.join(RESIZED_IMAGES_DIR, resizedImg));
+  // attempt to send newly resized image file
+  res.sendFile(resizedImg);
 });
 
 app.listen(PORT, () =>

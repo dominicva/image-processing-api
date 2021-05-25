@@ -19,20 +19,27 @@ const RESIZED_IMAGES_DIR = path.join(
   'resized'
 );
 
+const parseQueryToFilename = function (
+  filename: string,
+  width: number,
+  height: number
+) {
+  // slice filename to remove .png extension
+  return `${filename.slice(0, -4)}-${width}x${height}.jpg`;
+};
+
 const resizeAndWrite = function (
   inputImg: string,
   width: number,
   height: number
-): string {
-  let resizedFileName = `${inputImg}-${width}x${height}.jpg`;
+): void {
+  const resizedFileName = parseQueryToFilename(inputImg, width, height);
 
   sharp(path.join(ORIGINAL_IMAGES_DIR, inputImg))
     .resize(width, height)
     .toFile(path.join(RESIZED_IMAGES_DIR, resizedFileName), function (err) {
       console.error(err);
     });
-
-  return resizedFileName;
 };
 
-export { resizeAndWrite, RESIZED_IMAGES_DIR };
+export { parseQueryToFilename, resizeAndWrite, RESIZED_IMAGES_DIR };
