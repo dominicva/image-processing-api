@@ -116,18 +116,8 @@ const reformat = async function (
   }
 };
 
-const applyEffect = async function (filepath: string, effect: string) {
-  switch (effect) {
-    case 'blur':
-      return blur(filepath);
-    case 'grayscale':
-      return grayscale(filepath);
-  }
-};
-
 export default {
   reformat,
-  applyEffect,
   getMetaData,
   grayscale,
   resize,
