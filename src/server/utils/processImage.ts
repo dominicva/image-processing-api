@@ -86,13 +86,20 @@ const greyscale = async function (path: string) {
     .toFile(`./processed/${image}-grayscale.png`);
 };
 
-const resize = async function (path: string, width: number, height: number) {
-  const name = parsePath.name(path);
-  const ext = parsePath.extension(path);
-  const output = `processed/${name}-${width}x${height}.${ext}`;
+const resize = async function (
+  filepath: string,
+  width: number,
+  height: number
+) {
+  const name = parsePath.name(filepath);
+  const ext = parsePath.extension(filepath);
+  const output = path.join(
+    PROCESSED_IMAGES_DIR,
+    `${name}-${width}x${height}.${ext}`
+  );
 
   //  Resizes the image
-  await sharp(path).resize(width, height).png().toFile(output);
+  await sharp(filepath).resize(width, height).png().toFile(output);
 
   return output;
 };
