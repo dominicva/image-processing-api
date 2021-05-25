@@ -42,7 +42,7 @@ app.get(
       // convert to specified format
       outputFile = await processImg.reformat(inputFile, String(format));
     } else if (metadata) {
-      // get meta data
+      // TODO: get meta data
     } else if (blurFactor) {
       outputFile = await processImg.blur(inputFile, Number(blurFactor));
     } else if (toGrayscale) {

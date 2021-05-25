@@ -11,18 +11,18 @@ const PROCESSED_IMAGES_DIR = path.join(
 );
 
 const parsePath = {
-  name(filepath: string) {
+  name(filepath: string): string {
     const segments = filepath.split('/');
     const pre = segments[segments.length - 1];
     return pre.split('.')[0];
   },
-  extension(path: string) {
+  extension(path: string): string {
     const segments = path.split('.');
     return segments[segments.length - 1];
   },
 };
 
-const toPng = async function (filepath: string) {
+const toPng = async function (filepath: string): Promise<string> {
   const image = parsePath.name(filepath);
   const output = path.join(PROCESSED_IMAGES_DIR, `${image}.png`);
 
@@ -31,7 +31,7 @@ const toPng = async function (filepath: string) {
   return output;
 };
 
-const toJpeg = async function (filepath: string) {
+const toJpeg = async function (filepath: string): Promise<string> {
   const image = parsePath.name(filepath);
   const output = path.join(PROCESSED_IMAGES_DIR, `${image}.jpeg`);
 
@@ -40,7 +40,7 @@ const toJpeg = async function (filepath: string) {
   return output;
 };
 
-const toWebP = async function (filepath: string) {
+const toWebP = async function (filepath: string): Promise<string> {
   const image = parsePath.name(filepath);
   const output = path.join(PROCESSED_IMAGES_DIR, `${image}.webp`);
 
@@ -49,7 +49,7 @@ const toWebP = async function (filepath: string) {
   return output;
 };
 
-const toTiff = async function (filepath: string) {
+const toTiff = async function (filepath: string): Promise<string> {
   const image = parsePath.name(filepath);
   const output = path.join(PROCESSED_IMAGES_DIR, `${image}.tiff`);
 
@@ -63,7 +63,7 @@ const getMetaData = async function (path: string) {
   console.log('metadata', metadata);
 };
 
-const grayscale = async function (filepath: string) {
+const grayscale = async function (filepath: string): Promise<string> {
   const image = parsePath.name(filepath);
   const output = path.join(PROCESSED_IMAGES_DIR, `${image}-grayscale.png`);
 
@@ -77,7 +77,7 @@ const resize = async function (
   filepath: string,
   width: number,
   height: number
-) {
+): Promise<string> {
   const name = parsePath.name(filepath);
   const ext = parsePath.extension(filepath);
   const output = path.join(
@@ -91,7 +91,10 @@ const resize = async function (
   return output;
 };
 
-const blur = async function (filepath: string, blurFactor: number) {
+const blur = async function (
+  filepath: string,
+  blurFactor: number
+): Promise<string> {
   const name = parsePath.name(filepath);
   const output = path.join(
     PROCESSED_IMAGES_DIR,
