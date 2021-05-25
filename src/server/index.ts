@@ -41,7 +41,7 @@ app.get(
       // apply correct effect – currently grayscale or blur
     }
 
-    res.end();
+    res.sendFile(String(outputFile));
   }
 );
 

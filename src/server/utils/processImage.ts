@@ -7,6 +7,8 @@ const parsePath = {
   name(filepath: string) {
     // const name = path.match(/\/(.+)\./);
     // if (name) return name[1];
+    console.log('filepath:***', filepath);
+
     const segments = filepath.split('/');
     const pre = segments[segments.length - 1];
     return pre.split('.')[0];
@@ -18,7 +20,7 @@ const parsePath = {
 };
 
 const toPng = async function (filepath: string) {
-  const image = parsePath.name(path);
+  const image = parsePath.name(filepath);
   const output = path.join(PROCESSED_IMAGES_DIR, `${image}.png`);
 
   await sharp(filepath).png().toFile(output);
@@ -27,7 +29,7 @@ const toPng = async function (filepath: string) {
 };
 
 const toJpeg = async function (filepath: string) {
-  const image = parsePath.name(path);
+  const image = parsePath.name(filepath);
   const output = path.join(PROCESSED_IMAGES_DIR, `${image}.jpeg`);
 
   await sharp(filepath).jpeg().toFile(output);
