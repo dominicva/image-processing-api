@@ -23,7 +23,7 @@ const parseQueryToFilename = function (
   filename: string,
   width: number,
   height: number
-) {
+): string {
   // slice filename to remove .png extension
   return `${filename.slice(0, -4)}-${width}x${height}.jpg`;
 };
