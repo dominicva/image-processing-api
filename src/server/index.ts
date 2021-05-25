@@ -22,8 +22,11 @@ app.get('/api/images', (req: express.Request, res: express.Response, next) => {
     parseQueryToFilename(String(filename), Number(width), Number(height))
   );
 
-  // attempt to send newly resized image file
-  res.sendFile(resizedImg);
+  // hack to delay sendFile until new image creation complete
+  setTimeout(() => {
+    // send newly resized image file
+    res.sendFile(resizedImg);
+  }, 200);
 });
 
 app.listen(PORT, () =>
