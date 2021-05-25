@@ -7,8 +7,6 @@ const parsePath = {
   name(filepath: string) {
     // const name = path.match(/\/(.+)\./);
     // if (name) return name[1];
-    console.log('filepath:***', filepath);
-
     const segments = filepath.split('/');
     const pre = segments[segments.length - 1];
     return pre.split('.')[0];
@@ -55,35 +53,19 @@ const toTiff = async function (filepath: string) {
   return output;
 };
 
-const reformat = async function (
-  path: string,
-  format: string
-): Promise<string | undefined> {
-  switch (format) {
-    case 'png':
-      return toPng(path);
-    case 'jpeg':
-      return toJpeg(path);
-    case 'webp':
-      return toWebP(path);
-    case 'tiff':
-      return toTiff(path);
-  }
-};
-
 const getMetaData = async function (path: string) {
   const metadata = await sharp(path).metadata();
   console.log('metadata', metadata);
 };
 
-const greyscale = async function (path: string) {
-  const image = parsePath.name(path);
+const grayscale = async function (filepath: string) {
+  const image = parsePath.name(filepath);
+  const output = path.join(PROCESSED_IMAGES_DIR, `${image}-grayscale.png`);
 
   // Applies a grayscale effect to the image
-  await sharp(path)
-    .grayscale()
-    .png()
-    .toFile(`./processed/${image}-grayscale.png`);
+  await sharp(filepath).grayscale().png().toFile(output);
+
+  return output;
 };
 
 const resize = async function (
@@ -104,21 +86,50 @@ const resize = async function (
   return output;
 };
 
-const blur = async function (path: string, blurFactor: number) {
-  const name = parsePath.name(path);
+const blur = async function (filepath: string, blurFactor: number) {
+  const name = parsePath.name(filepath);
+  const output = path.join(
+    PROCESSED_IMAGES_DIR,
+    `${name}-blur-${blurFactor}.png`
+  );
+
   // Blur the image. When used without parameters, performs a fast, mild blur of the output image. When a sigma is provided, performs a slower, more accurate Gaussian blur.
   // Value between 0.3 and 1000
-  await sharp(path).blur(blurFactor).png().toFile(`processed/${name}-blur.png`);
+  await sharp(filepath).blur(blurFactor).png().toFile(output);
+
+  return output;
+};
+
+const reformat = async function (
+  filepath: string,
+  format: string
+): Promise<string | undefined> {
+  switch (format) {
+    case 'png':
+      return toPng(filepath);
+    case 'jpeg':
+      return toJpeg(filepath);
+    case 'webp':
+      return toWebP(filepath);
+    case 'tiff':
+      return toTiff(filepath);
+  }
+};
+
+const applyEffect = async function (filepath: string, effect: string) {
+  switch (effect) {
+    case 'blur':
+      return blur(filepath);
+    case 'grayscale':
+      return grayscale(filepath);
+  }
 };
 
 export default {
-  // toPng,
-  // toJpeg,
-  // toWebP,
-  // toTiff,
   reformat,
+  applyEffect,
   getMetaData,
-  greyscale,
+  grayscale,
   resize,
   blur,
 };

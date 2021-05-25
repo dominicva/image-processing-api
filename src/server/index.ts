@@ -17,10 +17,17 @@ const PORT = 3000;
 app.get(
   '/api/images',
   async (req: express.Request, res: express.Response, next) => {
-    const { filename, width, height, format, metadata, effect } = req.query;
+    const {
+      filename,
+      width,
+      height,
+      format,
+      metadata,
+      effect,
+      blurFactor,
+    } = req.query;
 
     const inputFile = path.join(ORIGINAL_IMAGES_DIR, String(filename));
-    console.log('inputFile', inputFile);
 
     let outputFile: string | undefined;
 
@@ -34,11 +41,13 @@ app.get(
     } else if (format) {
       // convert to specified format
       outputFile = await processImg.reformat(inputFile, String(format));
-      console.log('outputFile', outputFile);
     } else if (metadata) {
       // get meta data
+    } else if (blurFactor) {
+      outputFile = await processImg.blur(inputFile, Number(blurFactor));
     } else if (effect) {
       // apply correct effect – currently grayscale or blur
+      outputFile = await processImg.applyEffect(inputFile, String(effect));
     }
 
     res.sendFile(String(outputFile));
