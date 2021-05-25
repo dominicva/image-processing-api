@@ -12,8 +12,6 @@ const PROCESSED_IMAGES_DIR = path.join(
 
 const parsePath = {
   name(filepath: string) {
-    // const name = path.match(/\/(.+)\./);
-    // if (name) return name[1];
     const segments = filepath.split('/');
     const pre = segments[segments.length - 1];
     return pre.split('.')[0];
