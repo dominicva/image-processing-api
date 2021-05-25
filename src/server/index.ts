@@ -1,18 +1,18 @@
 import path from 'path';
 import express from 'express';
 
-import {
-  parseQueryToFilename,
-  resizeAndWrite,
-  ORIGINAL_IMAGES_DIR,
-  PROCESSED_IMAGES_DIR,
-} from './utils/resizeAndWrite';
-
 import processImg from './utils/processImage';
-console.log(processImg);
 
 const app = express();
 const PORT = 3000;
+
+const ORIGINAL_IMAGES_DIR = path.join(
+  __dirname,
+  '../',
+  '../',
+  'images',
+  'originals'
+);
 
 app.get('/api/images', async (req: express.Request, res: express.Response) => {
   const {

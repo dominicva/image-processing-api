@@ -1,7 +1,14 @@
 const sharp = require('sharp');
-const fs = require('fs');
 const path = require('path');
-import { PROCESSED_IMAGES_DIR } from './resizeAndWrite';
+
+const PROCESSED_IMAGES_DIR = path.join(
+  __dirname,
+  '../',
+  '../',
+  '../',
+  'images',
+  'processed'
+);
 
 const parsePath = {
   name(filepath: string) {
