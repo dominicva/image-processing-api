@@ -5,7 +5,7 @@ import {
   parseQueryToFilename,
   resizeAndWrite,
   ORIGINAL_IMAGES_DIR,
-  RESIZED_IMAGES_DIR,
+  PROCESSED_IMAGES_DIR,
 } from './utils/resizeAndWrite';
 
 import processImg from './utils/processImage';

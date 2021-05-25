@@ -11,13 +11,13 @@ const ORIGINAL_IMAGES_DIR = path.join(
   'originals'
 );
 
-const RESIZED_IMAGES_DIR = path.join(
+const PROCESSED_IMAGES_DIR = path.join(
   __dirname,
   '../',
   '../',
   '../',
   'images',
-  'resized'
+  'processed'
 );
 
 const parseQueryToFilename = function (
@@ -57,5 +57,5 @@ export {
   parseQueryToFilename,
   resizeAndWrite,
   ORIGINAL_IMAGES_DIR,
-  RESIZED_IMAGES_DIR,
+  PROCESSED_IMAGES_DIR,
 };

@@ -1,7 +1,7 @@
 const sharp = require('sharp');
 const fs = require('fs');
 const path = require('path');
-import { ORIGINAL_IMAGES_DIR, RESIZED_IMAGES_DIR } from './resizeAndWrite';
+import { PROCESSED_IMAGES_DIR } from './resizeAndWrite';
 
 const parsePath = {
   name(filepath: string) {
@@ -17,40 +17,38 @@ const parsePath = {
   },
 };
 
-const toPng = async function (path: string) {
+const toPng = async function (filepath: string) {
   const image = parsePath.name(path);
-  const output = `./processed/${image}.png`;
+  const output = path.join(PROCESSED_IMAGES_DIR, `${image}.png`);
 
-  await sharp(path).png().toFile(output);
+  await sharp(filepath).png().toFile(output);
 
   return output;
 };
 
-const toJpeg = async function (path: string) {
+const toJpeg = async function (filepath: string) {
   const image = parsePath.name(path);
-  const output = `./processed/${image}.jpeg`;
+  const output = path.join(PROCESSED_IMAGES_DIR, `${image}.jpeg`);
 
-  await sharp(path).jpeg().toFile(output);
+  await sharp(filepath).jpeg().toFile(output);
 
   return output;
 };
 
 const toWebP = async function (filepath: string) {
   const image = parsePath.name(filepath);
-  const output = path.join(RESIZED_IMAGES_DIR, `${image}.webp`);
-  console.log('image', image);
-  console.log('output', output);
+  const output = path.join(PROCESSED_IMAGES_DIR, `${image}.webp`);
 
   await sharp(filepath).webp().toFile(output);
 
   return output;
 };
 
-const toTiff = async function (path: string) {
-  const image = parsePath.name(path);
-  const output = `./processed/${image}.tiff`;
+const toTiff = async function (filepath: string) {
+  const image = parsePath.name(filepath);
+  const output = path.join(PROCESSED_IMAGES_DIR, `${image}.tiff`);
 
-  await sharp(path).tiff().toFile(output);
+  await sharp(filepath).tiff().toFile(output);
 
   return output;
 };
