@@ -1,5 +1,6 @@
 import path from 'path';
 import sharp from 'sharp';
+import fs from 'fs';
 
 const ORIGINAL_IMAGES_DIR = path.join(
   __dirname,
@@ -28,18 +29,28 @@ const parseQueryToFilename = function (
   return `${filename.slice(0, -4)}-${width}x${height}.jpg`;
 };
 
-const resizeAndWrite = function (
+const resizeAndWrite = async function (
   inputImg: string,
   width: number,
   height: number
-): void {
-  const resizedFileName = parseQueryToFilename(inputImg, width, height);
+): Promise<void> {
+  try {
+    const resizedFileName = parseQueryToFilename(inputImg, width, height);
 
-  sharp(path.join(ORIGINAL_IMAGES_DIR, inputImg))
-    .resize(width, height)
-    .toFile(path.join(RESIZED_IMAGES_DIR, resizedFileName), function (err) {
-      console.error(err);
-    });
+    const image = await sharp(path.join(ORIGINAL_IMAGES_DIR, inputImg))
+      .resize(width, height)
+      .png()
+      .toBuffer();
+    // .toFile(path.join(RESIZED_IMAGES_DIR, resizedFileName), function (err) {
+    //   console.error(err);
+    // });
+    console.log(image);
+    fs.writeFileSync(resizedFileName, image);
+
+    // console.log(info);
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 export { parseQueryToFilename, resizeAndWrite, RESIZED_IMAGES_DIR };
