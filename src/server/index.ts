@@ -53,18 +53,3 @@ app.get('/api/images', async (req: express.Request, res: express.Response) => {
 app.listen(PORT, () =>
   console.log(`Image Processing API listening on port ${PORT}`)
 );
-
-// uses sharp to resize the image and write it to new file in 'resized' dir
-//  await resizeAndWrite(String(filename), Number(width), Number(height));
-
-// filepath to the resized image
-// const resizedImg = path.join(
-//   RESIZED_IMAGES_DIR,
-//   parseQueryToFilename(String(filename), Number(width), Number(height))
-// );
-
-// hack to delay sendFile until new image creation complete
-// setTimeout(() => {
-//   // send newly resized image file
-//   res.sendFile(resizedImg);
-// }, 200);
