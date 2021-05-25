@@ -53,4 +53,9 @@ const resizeAndWrite = async function (
   }
 };
 
-export { parseQueryToFilename, resizeAndWrite, RESIZED_IMAGES_DIR };
+export {
+  parseQueryToFilename,
+  resizeAndWrite,
+  ORIGINAL_IMAGES_DIR,
+  RESIZED_IMAGES_DIR,
+};

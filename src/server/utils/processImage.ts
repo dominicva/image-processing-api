@@ -1,13 +1,15 @@
-import { parse } from 'path';
-
 const sharp = require('sharp');
 const fs = require('fs');
 const path = require('path');
+import { ORIGINAL_IMAGES_DIR, RESIZED_IMAGES_DIR } from './resizeAndWrite';
 
 const parsePath = {
-  name(path: string) {
-    const name = path.match(/\/(.+)\./);
-    if (name) return name[1];
+  name(filepath: string) {
+    // const name = path.match(/\/(.+)\./);
+    // if (name) return name[1];
+    const segments = filepath.split('/');
+    const pre = segments[segments.length - 1];
+    return pre.split('.')[0];
   },
   extension(path: string) {
     const segments = path.split('.');
@@ -17,26 +19,56 @@ const parsePath = {
 
 const toPng = async function (path: string) {
   const image = parsePath.name(path);
-  const info = await sharp(path).png().toFile(`./processed/${image}.png`);
-  console.log('info', info);
+  const output = `./processed/${image}.png`;
+
+  await sharp(path).png().toFile(output);
+
+  return output;
 };
 
 const toJpeg = async function (path: string) {
   const image = parsePath.name(path);
-  const info = await sharp(path).jpeg().toFile(`./processed/${image}.jpeg`);
-  console.log('info', info);
+  const output = `./processed/${image}.jpeg`;
+
+  await sharp(path).jpeg().toFile(output);
+
+  return output;
 };
 
-const toWebP = async function (path: string) {
-  const image = parsePath.name(path);
-  const info = await sharp(path).webp().toFile(`./processed/${image}.webp`);
-  console.log('info', info);
+const toWebP = async function (filepath: string) {
+  const image = parsePath.name(filepath);
+  const output = path.join(RESIZED_IMAGES_DIR, `${image}.webp`);
+  console.log('image', image);
+  console.log('output', output);
+
+  await sharp(filepath).webp().toFile(output);
+
+  return output;
 };
 
 const toTiff = async function (path: string) {
   const image = parsePath.name(path);
-  const info = await sharp(path).tiff().toFile(`./processed/${image}.tiff`);
-  console.log('info', info);
+  const output = `./processed/${image}.tiff`;
+
+  await sharp(path).tiff().toFile(output);
+
+  return output;
+};
+
+const reformat = async function (
+  path: string,
+  format: string
+): Promise<string | undefined> {
+  switch (format) {
+    case 'png':
+      return toPng(path);
+    case 'jpeg':
+      return toJpeg(path);
+    case 'webp':
+      return toWebP(path);
+    case 'tiff':
+      return toTiff(path);
+  }
 };
 
 const getMetaData = async function (path: string) {
@@ -61,6 +93,8 @@ const resize = async function (path: string, width: number, height: number) {
 
   //  Resizes the image
   await sharp(path).resize(width, height).png().toFile(output);
+
+  return output;
 };
 
 const blur = async function (path: string, blurFactor: number) {
@@ -71,10 +105,11 @@ const blur = async function (path: string, blurFactor: number) {
 };
 
 export default {
-  toPng,
-  toJpeg,
-  toWebP,
-  toTiff,
+  // toPng,
+  // toJpeg,
+  // toWebP,
+  // toTiff,
+  reformat,
   getMetaData,
   greyscale,
   resize,
