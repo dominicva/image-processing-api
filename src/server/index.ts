@@ -14,45 +14,43 @@ console.log(processImg);
 const app = express();
 const PORT = 3000;
 
-app.get(
-  '/api/images',
-  async (req: express.Request, res: express.Response, next) => {
-    const {
-      filename,
-      width,
-      height,
-      format,
-      metadata,
-      effect,
-      blurFactor,
-    } = req.query;
+app.get('/api/images', async (req: express.Request, res: express.Response) => {
+  const {
+    filename,
+    width,
+    height,
+    format,
+    metadata,
+    effect,
+    blurFactor,
+    toGrayscale,
+  } = req.query;
 
-    const inputFile = path.join(ORIGINAL_IMAGES_DIR, String(filename));
+  const inputFile = path.join(ORIGINAL_IMAGES_DIR, String(filename));
 
-    let outputFile: string | undefined;
+  let outputFile: string | undefined;
 
-    if (width && height) {
-      // resize
-      outputFile = await processImg.resize(
-        inputFile,
-        Number(width),
-        Number(height)
-      );
-    } else if (format) {
-      // convert to specified format
-      outputFile = await processImg.reformat(inputFile, String(format));
-    } else if (metadata) {
-      // get meta data
-    } else if (blurFactor) {
-      outputFile = await processImg.blur(inputFile, Number(blurFactor));
-    } else if (effect) {
-      // apply correct effect – currently grayscale or blur
-      outputFile = await processImg.applyEffect(inputFile, String(effect));
-    }
-
-    res.sendFile(String(outputFile));
+  if (width && height) {
+    // resize
+    outputFile = await processImg.resize(
+      inputFile,
+      Number(width),
+      Number(height)
+    );
+  } else if (format) {
+    // convert to specified format
+    outputFile = await processImg.reformat(inputFile, String(format));
+  } else if (metadata) {
+    // get meta data
+  } else if (blurFactor) {
+    outputFile = await processImg.blur(inputFile, Number(blurFactor));
+  } else if (toGrayscale) {
+    // apply correct effect – currently grayscale or blur
+    outputFile = await processImg.grayscale(inputFile);
   }
-);
+
+  res.sendFile(String(outputFile));
+});
 
 app.listen(PORT, () =>
   console.log(`Image Processing API listening on port ${PORT}`)
