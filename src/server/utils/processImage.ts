@@ -124,10 +124,4 @@ const reformat = async function (
   }
 };
 
-export default {
-  reformat,
-  getMetaData,
-  grayscale,
-  resize,
-  blur,
-};
+export { reformat, getMetaData, grayscale, resize, blur };

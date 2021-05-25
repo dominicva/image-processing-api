@@ -1,7 +1,7 @@
 import path from 'path';
 import express from 'express';
 
-import processImg from './utils/processImage';
+import { resize, reformat, blur, grayscale } from './utils/processImage';
 
 const app = express();
 const PORT = 3000;
@@ -33,20 +33,16 @@ app.get(
 
     if (width && height) {
       // resize
-      outputFile = await processImg.resize(
-        inputFile,
-        Number(width),
-        Number(height)
-      );
+      outputFile = await resize(inputFile, Number(width), Number(height));
     } else if (format) {
       // convert to specified format
-      outputFile = await processImg.reformat(inputFile, String(format));
+      outputFile = await reformat(inputFile, String(format));
     } else if (metadata) {
       // TODO: get meta data
     } else if (blurFactor) {
-      outputFile = await processImg.blur(inputFile, Number(blurFactor));
+      outputFile = await blur(inputFile, Number(blurFactor));
     } else if (toGrayscale) {
-      outputFile = await processImg.grayscale(inputFile);
+      outputFile = await grayscale(inputFile);
     }
 
     if (outputFile) {
