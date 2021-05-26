@@ -1,5 +1,5 @@
-const sharp = require('sharp');
-const path = require('path');
+import sharp from 'sharp';
+import path from 'path';
 
 interface ImageCache {
   [key: string]: boolean;
