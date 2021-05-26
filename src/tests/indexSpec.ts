@@ -1,9 +1,7 @@
 import supertest from 'supertest';
 import app from '../server/index';
 import request from 'supertest';
-
-// const request = supertest(app);
-// console.log(request);
+import async from 'async';
 
 describe('Test endpoint respsonses', () => {
   it('should return correct (jpeg) image type and response code', (done) => {
@@ -22,3 +20,16 @@ describe('Test endpoint respsonses', () => {
       .expect(200, done);
   });
 });
+
+// describe('Testing caching functionality', () => {
+//   it('Should return cached image if possible (status code 304)', (done) => {
+//     request(app)
+//       .get('/api/images?filename=fjord.jpg&width=700&height=500')
+//       .expect(200)
+//       .then(() => {
+//         request(app)
+//           .get('/api/images?filename=fjord.jpg&width=700&height=500')
+//           .expect(304, done);
+//       });
+//   });
+// });
