@@ -2,26 +2,15 @@ import sharp from 'sharp';
 import path from 'path';
 import { PROCESSED_IMAGES_DIR } from '../utils/dirPaths';
 import parsePath from './pathParser';
-import { cache, inCache, storeInCache } from './cache';
-
-// const PROCESSED_IMAGES_DIR = path.join(
-//   __dirname,
-//   '../',
-//   '../',
-//   '../',
-//   'images',
-//   'processed'
-// );
+import { inCache, storeInCache } from './cache';
 
 const toPng = async function (filepath: string): Promise<string> {
-  console.log('CACHE BEFORE:', cache);
   const image = parsePath.name(filepath);
   const output = path.join(PROCESSED_IMAGES_DIR, `${image}.png`);
 
   if (!inCache(output)) {
     await sharp(filepath).png().toFile(output);
     storeInCache(output);
-    console.log('CACHE AFTER:', cache);
   }
 
   return output;

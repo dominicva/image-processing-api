@@ -1,19 +1,9 @@
 import path from 'path';
 import express from 'express';
-// import { resize, reformat, blur, grayscale } from '../utils/processImage';
 import { ORIGINAL_IMAGES_DIR } from '../utils/dirPaths';
 import reformat from '../utils/reformat';
 import resize from '../utils/resize';
 import { grayscale, blur } from '../utils/effects';
-
-// const ORIGINAL_IMAGES_DIR = path.join(
-//   __dirname,
-//   '../',
-//   '../',
-//   '../',
-//   'images',
-//   'originals'
-// );
 
 const processQuery = async function (
   req: express.Request,

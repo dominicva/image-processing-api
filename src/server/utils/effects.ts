@@ -2,6 +2,7 @@ import path from 'path';
 import sharp from 'sharp';
 import parsePath from './pathParser';
 import { PROCESSED_IMAGES_DIR } from './dirPaths';
+import { inCache, storeInCache } from './cache';
 
 const grayscale = async function (filepath: string): Promise<string> {
   const image = parsePath.name(filepath);

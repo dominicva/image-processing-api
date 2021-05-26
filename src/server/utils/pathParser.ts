@@ -1,5 +1,3 @@
-import { parse } from 'path';
-
 const parsePath = {
   name(filepath: string): string {
     const segments = filepath.split('/');
