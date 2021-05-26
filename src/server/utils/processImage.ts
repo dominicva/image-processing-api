@@ -1,6 +1,20 @@
 const sharp = require('sharp');
 const path = require('path');
 
+interface ImageCache {
+  [key: string]: boolean;
+}
+
+const cache: ImageCache = {};
+
+const inCache = function (filepath: string): boolean {
+  return cache[filepath] && true;
+};
+
+const storeInCache = function (filepath: string): void {
+  cache[filepath] = true;
+};
+
 const PROCESSED_IMAGES_DIR = path.join(
   __dirname,
   '../',
@@ -23,10 +37,15 @@ const parsePath = {
 };
 
 const toPng = async function (filepath: string): Promise<string> {
+  console.log('CACHE BEFORE:', cache);
   const image = parsePath.name(filepath);
   const output = path.join(PROCESSED_IMAGES_DIR, `${image}.png`);
 
-  await sharp(filepath).png().toFile(output);
+  if (!inCache(output)) {
+    await sharp(filepath).png().toFile(output);
+    storeInCache(output);
+    console.log('CACHE AFTER:', cache);
+  }
 
   return output;
 };
