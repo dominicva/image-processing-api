@@ -54,7 +54,10 @@ const toJpeg = async function (filepath: string): Promise<string> {
   const image = parsePath.name(filepath);
   const output = path.join(PROCESSED_IMAGES_DIR, `${image}.jpeg`);
 
-  await sharp(filepath).jpeg().toFile(output);
+  if (!inCache(output)) {
+    await sharp(filepath).jpeg().toFile(output);
+    storeInCache(output);
+  }
 
   return output;
 };
@@ -63,7 +66,10 @@ const toWebP = async function (filepath: string): Promise<string> {
   const image = parsePath.name(filepath);
   const output = path.join(PROCESSED_IMAGES_DIR, `${image}.webp`);
 
-  await sharp(filepath).webp().toFile(output);
+  if (!inCache(output)) {
+    await sharp(filepath).webp().toFile(output);
+    storeInCache(output);
+  }
 
   return output;
 };
@@ -72,7 +78,10 @@ const toTiff = async function (filepath: string): Promise<string> {
   const image = parsePath.name(filepath);
   const output = path.join(PROCESSED_IMAGES_DIR, `${image}.tiff`);
 
-  await sharp(filepath).tiff().toFile(output);
+  if (!inCache(output)) {
+    await sharp(filepath).tiff().toFile(output);
+    storeInCache(output);
+  }
 
   return output;
 };
@@ -86,8 +95,11 @@ const grayscale = async function (filepath: string): Promise<string> {
   const image = parsePath.name(filepath);
   const output = path.join(PROCESSED_IMAGES_DIR, `${image}-grayscale.png`);
 
-  // Applies a grayscale effect to the image
-  await sharp(filepath).grayscale().png().toFile(output);
+  if (!inCache(output)) {
+    // Applies a grayscale effect to the image
+    await sharp(filepath).grayscale().png().toFile(output);
+    storeInCache(output);
+  }
 
   return output;
 };
@@ -104,8 +116,11 @@ const resize = async function (
     `${name}-${width}x${height}.${ext}`
   );
 
-  //  Resizes the image
-  await sharp(filepath).resize(width, height).png().toFile(output);
+  if (!inCache(output)) {
+    //  Resizes the image
+    await sharp(filepath).resize(width, height).png().toFile(output);
+    storeInCache(output);
+  }
 
   return output;
 };
@@ -120,8 +135,11 @@ const blur = async function (
     `${name}-blur-${blurFactor}.png`
   );
 
-  // Blur value between 0.3 and 1000
-  await sharp(filepath).blur(blurFactor).png().toFile(output);
+  if (!inCache(output)) {
+    // Blur value between 0.3 and 1000
+    await sharp(filepath).blur(blurFactor).png().toFile(output);
+    storeInCache(output);
+  }
 
   return output;
 };
