@@ -1,7 +1,5 @@
-import supertest from 'supertest';
 import app from '../server/index';
 import request from 'supertest';
-import async from 'async';
 
 describe('Test endpoint respsonses', () => {
   it('should return correct (jpeg) image type and response code', (done) => {
