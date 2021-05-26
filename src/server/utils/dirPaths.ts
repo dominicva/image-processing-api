@@ -18,4 +18,6 @@ const PROCESSED_IMAGES_DIR = path.join(
   'processed'
 );
 
-export { ORIGINAL_IMAGES_DIR, PROCESSED_IMAGES_DIR };
+const CLIENT = path.join(__dirname, '../', '../', '../', 'src', 'client');
+
+export { ORIGINAL_IMAGES_DIR, PROCESSED_IMAGES_DIR, CLIENT };
