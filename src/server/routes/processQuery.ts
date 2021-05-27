@@ -10,14 +10,8 @@ const processQuery = async function (
   res: express.Response
 ): Promise<void> {
   try {
-    const {
-      filename,
-      width,
-      height,
-      format,
-      blurFactor,
-      toGrayscale,
-    } = req.query;
+    const { filename, width, height, format, blurFactor, toGrayscale } =
+      req.query;
 
     const inputFile = path.join(ORIGINAL_IMAGES_DIR, String(filename));
 
