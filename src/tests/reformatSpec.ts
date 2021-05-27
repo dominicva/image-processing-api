@@ -6,11 +6,13 @@ const mocks = {
   formats: ['png', 'jpeg', 'webp', 'tiff'],
 };
 
-mocks.formats.forEach((format: string) => {
-  it(`expect reformat(mocks.filepath, ${format}) to return filepath with correct extension`, async () => {
-    const expectedResult = `/Users/dominicvanalmsick/Downloads/code/udacity/fullstack-javascript-ND/image-processing-api/images/processed/palmtunnel.${format}`;
-    const actualResult = await reformat(mocks.filepath, format);
+describe('Test reformatting functionality', () => {
+  mocks.formats.forEach((format: string) => {
+    it(`expect reformat(mocks.filepath, ${format}) to return filepath with correct extension`, async () => {
+      const expectedResult = `/Users/dominicvanalmsick/Downloads/code/udacity/fullstack-javascript-ND/image-processing-api/images/processed/palmtunnel.${format}`;
+      const actualResult = await reformat(mocks.filepath, format);
 
-    expect(expectedResult).toEqual(String(actualResult));
+      expect(expectedResult).toEqual(String(actualResult));
+    });
   });
 });
