@@ -3,7 +3,7 @@
 ## Big picture
 
 - API that allows the user to apply various transformations to image files.
-- Images in the 'images/originals/' directory can be processed, with processed images written to the 'images/processed' directory.
+- Images in the 'images/originals/' directory can be processed, with processed images written to the 'images/processed/' directory.
 
 ## Available image transformations
 
@@ -11,7 +11,7 @@
 
 - Resize
 
-  - Resize an image by providing its filename and the resized dimensions (pixel values) in the following pattern (using 500x300 dimensions as an example):
+  - Resize an image by providing its filename and the resized dimensions (pixel values) in the following pattern (500x300 as example):
     http://localhost:3000/api/images?filename=fjord.jpg&width=500&height=300
 
 - Reformat
