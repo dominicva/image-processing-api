@@ -37,4 +37,4 @@
 
 - Get the code
 - Run `npm install`
-- In separate terminal windows run `npm run build` and `npm start`. These will transpile the TypseScript (in watch mode) and get the local host server ready at port 3000.
+- In separate terminal windows run `npm run build` and `npm start`. These will transpile the TypeScript (in watch mode) and get the local host server ready at port 3000.
