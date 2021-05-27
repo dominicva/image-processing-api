@@ -15,7 +15,6 @@ const processQuery = async function (
       width,
       height,
       format,
-      metadata,
       blurFactor,
       toGrayscale,
     } = req.query;
