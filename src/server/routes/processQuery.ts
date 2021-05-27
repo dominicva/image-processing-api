@@ -30,8 +30,6 @@ const processQuery = async function (
     } else if (format) {
       // convert to specified format
       outputFile = await reformat(inputFile, String(format));
-    } else if (metadata) {
-      // TODO: get meta data
     } else if (blurFactor) {
       outputFile = await blur(inputFile, Number(blurFactor));
     } else if (toGrayscale) {
