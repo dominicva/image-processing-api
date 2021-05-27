@@ -18,59 +18,63 @@
       Double check that the URL you enter matches one of the patterns below to
       avoid frustration!
     </p>
-    <h4>Image transformations available to you</h4>
-    <p>
-      Images to be processed must be located in the images/originals folder
-      within this project's directory.
-    </p>
-    <p>Processed images are written to the images/processed folder.</p>
-    <p>'fjord.jpg' is used as an example.</p>
-    <ul>
-      <label for="resize">
-        Resize
-        <li id="resize">
-          Resize an image by providing its filename and the resized dimensions
-          (pixel values) in the following pattern (using 500x300 dimensions as
-          an example):
-          <code
-            >http://localhost:3000/api/images?filename=fjord.jpg&width=500&height=300</code
-          >
-        </li>
-      </label>
+    <section class="help__section">
+      <h4>Image transformations available to you</h4>
+      <p>
+        Images to be processed must be located in the images/originals folder
+        within this project's directory.
+      </p>
+      <p>Processed images are written to the images/processed folder.</p>
+      <p>'fjord.jpg' is used as an example.</p>
+      <ul>
+        <label for="resize">
+          Resize
+          <li id="resize">
+            Resize an image by providing its filename and the resized dimensions
+            (pixel values) in the following pattern (using 500x300 dimensions as
+            an example):
+            <code
+              >http://localhost:3000/api/images?filename=fjord.jpg&width=500&height=300</code
+            >
+          </li>
+        </label>
 
-      <label for="reformat">
-        Reformat
-        <li id="reformat">
-          Convert an image to a different format by providing its filename and
-          the target format. Available options are png, jpeg, webp, and tiff.
-          Make sure the URL matches the following pattern.
-          <code
-            >http://localhost:3000/api/images?filename=fjord.jpg&format=OPTION</code
-          >
-        </li>
-      </label>
+        <label for="reformat">
+          Reformat
+          <li id="reformat">
+            Convert an image to a different format by providing its filename and
+            the target format. Available options are <strong>png</strong>,
+            <strong>jpeg</strong>, <strong>webp</strong>, and
+            <strong>tiff</strong>. Make sure the URL matches the following
+            pattern.
+            <code
+              >http://localhost:3000/api/images?filename=fjord.jpg&format=OPTION</code
+            >
+          </li>
+        </label>
 
-      <label for="grayscale">
-        Apply grayscale
-        <li id="grayscale">
-          Make sure the URL matches the following pattern.
-          <code
-            >http://localhost:3000/api/images?filename=fjord.jpg&toGrayscale=true</code
-          >
-        </li>
-      </label>
+        <label for="grayscale">
+          Apply grayscale
+          <li id="grayscale">
+            Make sure the URL matches the following pattern.
+            <code
+              >http://localhost:3000/api/images?filename=fjord.jpg&toGrayscale=true</code
+            >
+          </li>
+        </label>
 
-      <label for="blur">
-        Apply blur
-        <li id="blur">
-          The blur parameter ('blurFactor') can accept values between 0.3 and
-          1000. However, the image is already quite obscured by around 10. Make
-          sure the URL matches the following pattern.
-          <code
-            >http://localhost:3000/api/images?filename=fjord.jpg&blurFactor=VALUE</code
-          >
-        </li>
-      </label>
-    </ul>
+        <label for="blur">
+          Apply blur
+          <li id="blur">
+            The blur parameter ('blurFactor') can accept values between 0.3 and
+            1000. However, the image is already quite obscured by around 10.
+            Make sure the URL matches the following pattern.
+            <code
+              >http://localhost:3000/api/images?filename=fjord.jpg&blurFactor=VALUE</code
+            >
+          </li>
+        </label>
+      </ul>
+    </section>
   </body>
 </html>

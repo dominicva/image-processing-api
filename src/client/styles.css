@@ -4,8 +4,43 @@
 
 body {
   font-family: sans-serif;
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: #1c313a;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+p {
+  margin: 0.75rem 0;
 }
 
 ul {
+  padding: 0;
   list-style-type: none;
+  display: grid;
+  row-gap: 1.5rem;
+  margin-top: 2rem;
+  width: 100%;
+}
+
+li {
+  margin-top: 0.25rem;
+  font-weight: normal;
+}
+
+label {
+  font-weight: bold;
+}
+
+code {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  display: block;
+  word-wrap: break-word;
+}
+
+.help__section {
+  margin-top: 2rem;
+  width: 100%;
 }
