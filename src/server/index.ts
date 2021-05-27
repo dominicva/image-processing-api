@@ -6,6 +6,7 @@ import { CLIENT } from './utils/dirPaths';
 const PORT = 3000;
 
 const app = express();
+app.use(express.static(CLIENT));
 
 app.get('/api/images', processQuery);
 
