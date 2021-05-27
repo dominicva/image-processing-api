@@ -1,15 +1,22 @@
+import path from 'path';
 import reformat from '../server/utils/reformat';
+import {
+  ORIGINAL_IMAGES_DIR,
+  PROCESSED_IMAGES_DIR,
+} from '../server/utils/dirPaths';
 
 const mocks = {
-  filepath:
-    '/Users/dominicvanalmsick/Downloads/code/udacity/fullstack-javascript-ND/image-processing-api/images/originals/palmtunnel.jpg',
+  filepath: path.join(ORIGINAL_IMAGES_DIR, 'palmtunnel.jpg'),
   formats: ['png', 'jpeg', 'webp', 'tiff'],
 };
 
 describe('Test reformatting functionality', () => {
   mocks.formats.forEach((format: string) => {
     it(`expect reformat(mocks.filepath, ${format}) to return filepath with correct extension`, async () => {
-      const expectedResult = `/Users/dominicvanalmsick/Downloads/code/udacity/fullstack-javascript-ND/image-processing-api/images/processed/palmtunnel.${format}`;
+      const expectedResult = path.join(
+        PROCESSED_IMAGES_DIR,
+        `palmtunnel.${format}`
+      );
       const actualResult = await reformat(mocks.filepath, format);
 
       expect(expectedResult).toEqual(String(actualResult));
