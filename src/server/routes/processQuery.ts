@@ -8,7 +8,7 @@ import { grayscale, blur } from '../utils/effects';
 const processQuery = async function (
   req: express.Request,
   res: express.Response
-) {
+): Promise<void> {
   const {
     filename,
     width,

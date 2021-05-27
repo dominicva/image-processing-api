@@ -6,6 +6,7 @@
   "scripts": {
     "jasmine": "jasmine",
     "test": "npm run jasmine",
+    "lint": "eslint \"src/**/*.ts\"",
     "start": "nodemon dist/server/index.js",
     "build": "npx tsc --watch"
   },
@@ -20,6 +21,8 @@
     "@types/path-to-regexp": "^1.7.0",
     "@types/sharp": "^0.28.1",
     "@types/supertest": "^2.0.11",
+    "@typescript-eslint/eslint-plugin": "^4.25.0",
+    "@typescript-eslint/parser": "^4.25.0",
     "eslint": "^7.27.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.23.3",
