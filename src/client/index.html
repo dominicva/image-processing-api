@@ -6,8 +6,47 @@
     <title>Image Processing API</title>
   </head>
   <body>
-    <h1>Welome to the Image Processing API</h1>
-    <h2>Usage Instructions</h2>
-    <p>This API helps you apply various transformations to an image</p>
+    <h1>Image Processing API</h1>
+    <h3>
+      You may have ended up here after inputting a URL that the API cannot
+      handle
+    </h3>
+    <h2>Help</h2>
+    <p>This API helps lets you perform various image transformations.</p>
+    <p>
+      Double check that the URL you enter matches one of the patterns below to
+      avoid frustration!
+    </p>
+    <h4>Image transformations available to you</h4>
+    <p>
+      Note that images to be transformed must be located in the images/originals
+      folder within this project directory. The following examples use
+      'fjord.jpg' as an example image.
+    </p>
+    <ul>
+      <label for="resize">
+        Resize
+        <li id="resize">
+          Resize an image by providing its filename and the resized dimensions
+          (pixel values) in the following pattern (using 500x300 dimensions as
+          an example):
+          <code
+            >http://localhost:3000/api/images?filename=fjord.jpg&width=500&height=300</code
+          >
+        </li>
+      </label>
+
+      <label for="reformat">
+        Reformat
+        <li id="reformat">
+          Convert an image to a different format by providing its filename and
+          the target format. Available options are png, jpeg, webp, and tiff.
+          Make sure the URL matches the following pattern.
+          <code
+            >http://localhost:3000/api/images?filename=fjord.jpg&format=OPTION</code
+          >
+        </li>
+      </label>
+    </ul>
   </body>
 </html>
