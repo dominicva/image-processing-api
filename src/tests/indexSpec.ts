@@ -18,16 +18,3 @@ describe('Test endpoint respsonses', () => {
       .expect(200, done);
   });
 });
-
-// describe('Testing caching functionality', () => {
-//   it('Should return cached image if possible (status code 304)', (done) => {
-//     request(app)
-//       .get('/api/images?filename=fjord.jpg&width=700&height=500')
-//       .expect(200)
-//       .then(() => {
-//         request(app)
-//           .get('/api/images?filename=fjord.jpg&width=700&height=500')
-//           .expect(304, done);
-//       });
-//   });
-// });
