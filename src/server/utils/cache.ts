@@ -12,4 +12,4 @@ const storeInCache = function (filepath: string): void {
   cache[filepath] = true;
 };
 
-export { inCache, storeInCache };
+export { cache, inCache, storeInCache };
