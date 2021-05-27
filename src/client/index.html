@@ -47,6 +47,28 @@
           >
         </li>
       </label>
+
+      <label for="grayscale">
+        Apply grayscale
+        <li id="grayscale">
+          Make sure the URL matches the following pattern.
+          <code
+            >http://localhost:3000/api/images?filename=fjord.jpg&toGrayscale=true</code
+          >
+        </li>
+      </label>
+
+      <label for="blur">
+        Apply blur
+        <li id="blur">
+          The blur parameter ('blurFactor') can accept values between 0.3 and
+          1000. However, the image is already quite obscured by around 10. Make
+          sure the URL matches the following pattern.
+          <code
+            >http://localhost:3000/api/images?filename=fjord.jpg&blurFactor=VALUE</code
+          >
+        </li>
+      </label>
     </ul>
   </body>
 </html>
