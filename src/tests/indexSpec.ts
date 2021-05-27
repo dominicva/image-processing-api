@@ -32,6 +32,7 @@ describe('Test endpoint respsonses', () => {
       .expect('Content-Type', /image\/jpeg/)
       .expect(200, done);
   });
+
   it('should return correct (tiff) image type and response code', (done) => {
     request(app)
       .get('/api/images?filename=fjord.jpg&format=tiff')
