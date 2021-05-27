@@ -1,6 +1,6 @@
 import path from 'path';
 import express from 'express';
-import { ORIGINAL_IMAGES_DIR } from '../utils/dirPaths';
+import { CLIENT, ORIGINAL_IMAGES_DIR } from '../utils/dirPaths';
 import reformat from '../utils/reformat';
 import resize from '../utils/resize';
 import { grayscale, blur } from '../utils/effects';
@@ -40,7 +40,7 @@ const processQuery = async function (
   if (outputFile) {
     res.sendFile(String(outputFile));
   } else {
-    res.send('Please try entering a valid url');
+    res.sendFile(path.join(CLIENT, 'index.html'));
   }
 };
 
